@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        *{font-family: Helvetica, sans-serif;}
-        body{max-width:50%;}
-    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Gestión de Tareas</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Segunda pre-entrega: Javascript</h1>
-    <h2>El simulador de la 2da pre-entrega es un gestor de tareas, desde el que se pueden agregar (y asignar) nuevas tareas y filtrar las mismas por su responsable.</h2>
-    <h3>Para testear el simulador, llamar a las siguientes funciones en la consola:</h3>
-    <h3><ul>
-        <li>Crear una tarea nueva: creacionDeTareas()</li>
-        <li>Filtrar por responsable: buscadorDeResponsable()</li>
-    </ul></h3>
+    <header>
+        <h1>Web App de gestión de tareas</h1>
+        <div class="buscador">
+            <p>Buscar tarea por responsable:</p>
+            <input id="buscador" type="text" placeholder="Buscar">
+            <button id="btnBuscar">🔍</button>
+        </div>
+    </header>
 
-    <script src="main.js"></script>
+    <main>
+        <form id="taskForm">
+            <h2>Agregar tareas</h2>
+            <label for="nombreTarea">Nombre de la Tarea:</label>
+            <input type="text" id="nombreTarea" name="nombreTarea" required>
+            
+            <label for="responsable">Responsable:</label>
+            <input type="text" id="responsable" name="responsable" required>
+            
+            <label for="diaDeadline">Día del Deadline:</label>
+            <input type="number" id="diaDeadline" name="diaDeadline" required>
+            
+            <label for="mesDeadline">Mes del Deadline:</label>
+            <input type="number" id="mesDeadline" name="mesDeadline" required>
+            
+            <button type="submit">Agregar Tarea</button>
+        </form>
+        <div id="taskContainer">
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
 </body>
 </html>

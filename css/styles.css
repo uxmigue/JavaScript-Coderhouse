@@ -1,0 +1,109 @@
+body {
+    font-family: Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* HEADER */
+header {
+    background-color: #636363;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 5px solid #6fc3f8;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+/* BUSCADOR */
+.buscador {
+    margin-top: 10px;
+}
+
+.buscador p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#buscador {
+    padding: 5px;
+    font-size: 1em;
+    margin-right: 10px;
+    border-radius: 8px;
+}
+
+#btnBuscar {
+    padding: 5px 10px;
+    font-size: 1em;
+    background-color: #5285c0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#btnBuscar:hover {
+    background-color: #6fc3f8;
+}
+
+/* MAIN */
+main {
+    padding: 20px;
+}
+
+/* TAREAS */
+#taskContainer .task {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    border-left: 5px solid #6fc3f8;
+}
+
+#taskContainer .task p {
+    margin: 5px 0;
+}
+
+/* FORMULARIO */
+#taskForm {
+    background-color: #cecece;
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#taskForm label {
+    display: block;
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+#taskForm input {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+#taskForm button {
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #5285c0;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#taskForm button:hover {
+    background-color: #6fc3f8;
+}
