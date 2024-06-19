@@ -13,14 +13,33 @@ const tarea3 = new Tarea("Hacer campañas", "Marianna", 19, 12);
 const tarea4 = new Tarea("Contar vencimientos", "Maria", 19, 12);
 let listaTareas;
 
-function saveTasksToLocalStorage(tasks) {
+function saveTasksToDataBase(tasks) {
     localStorage.setItem('tareas', JSON.stringify(tasks));
 }
 
-function getTasksFromLocalStorage() {
+/* TRAER ARCHIVOS DE LA BASE DE DATOS LOCAL + FETCH*/
+
+function getTasksFromDataBase() {
+    fetch("./js/basededatos.json")
+        .then(response => response.json())
+        .then(data => {
+            data.forEach((tarea) => {
+                taskContainer.innerHTML += `
+                    <div class="task">
+                        <p>${tarea.tarea}</p>
+                        <p>Responsable: ${tarea.nombre}</p>
+                        <p>Finaliza el ${tarea.diaDeadline}/${tarea.mesDeadline}</p>
+                    </div>
+                ` 
+            })
+        })
+
+
     const tasks = localStorage.getItem('tareas');
     return tasks ? JSON.parse(tasks) : [tarea1, tarea2, tarea3, tarea4];
 }
+
+/* CARGA DE TAREAS */
 
 function renderTasks() {
     const taskContainer = document.getElementById("taskContainer")
@@ -37,8 +56,10 @@ function renderTasks() {
     })
 }
 
+/* CARGA DEL DOCUMENTO */
+
 document.addEventListener("DOMContentLoaded", function() {
-    listaTareas = getTasksFromLocalStorage()
+    listaTareas = getTasksFromDataBase()
     renderTasks()
     
     const searchBtn = document.getElementById("btnBuscar")
@@ -57,6 +78,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+/* CREACIÓN DE TAREAS + USO DE LIBRERÍAS */
+
 function creacionDeTareas() {
     const nombreTarea = document.getElementById("nombreTarea").value.toUpperCase().trim();
     const responsable = document.getElementById("responsable").value.toUpperCase().trim();
@@ -71,14 +94,32 @@ function creacionDeTareas() {
         return;
     }
 
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+      Toast.fire({
+        icon: "success",
+        title: "¡Tarea agregada exitosamente!"
+      });
+
     let tarea = new Tarea(nombreTarea, responsable, diaDeadline, mesDeadline);
     listaTareas.push(tarea);
-    saveTasksToLocalStorage(listaTareas);
+    saveTasksToDataBase(listaTareas);
     renderTasks();
     console.table(listaTareas);
 
     document.getElementById("taskForm").reset();
 }
+
+/* BUSCADOR DE RESPONSABLE + USO DE LIBRERÍAS*/
 
 function buscadorDeResponsable() {
     const input = document.getElementById("buscador");
@@ -88,6 +129,11 @@ function buscadorDeResponsable() {
     if(inputValue != "") {
         let resultado = listaTareas.filter((tarea) => tarea.responsable.toUpperCase() === inputValue)
         if(resultado.length === 0) {
+            Swal.fire({
+                icon: "error",
+                title: "No hay resultados para la búsqueda",
+                text: "Ingresa el nombre de un empleado de la empresa",
+            });
             taskContainer.innerHTML = `
             <div>
                 <p>No hay resultados para la búsqueda</p>
